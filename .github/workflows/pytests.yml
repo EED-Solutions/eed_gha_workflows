@@ -1,0 +1,8 @@
+name: pytests
+
+on:
+    pull_request:
+    workflow_dispatch:
+jobs:
+    pytests:
+      uses: ./.github/workflows/callable_pytests.yml

@@ -1,0 +1,9 @@
+name: ruff
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ruff:
+    uses: ./.github/workflows/callable_ruff.yml

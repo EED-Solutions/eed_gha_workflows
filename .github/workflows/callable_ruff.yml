@@ -20,5 +20,7 @@ jobs:
           enable-cache: true
       - name: set up ruff
         uses: astral-sh/ruff-action@v3
+        with:
+          version-file: "pyproject.toml"
       - name: Run Ruff
         run: uv run ruff check --output-format=github

@@ -1,5 +1,5 @@
 [project]
-name = "eed-package-template"
+name = "eed-gha-workflows"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

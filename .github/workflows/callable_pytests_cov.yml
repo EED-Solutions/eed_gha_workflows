@@ -2,6 +2,10 @@ name: callable_pytests_cov
 
 on:
   workflow_call:
+    inputs:
+      package_name:
+        required: true
+        type: string
 
 jobs:
   callable_pytests_cov:
@@ -23,4 +27,4 @@ jobs:
           uv sync
       - name: Run pytests
         run: |
-          uv run pytest --cov=eed_package_template tests/
+          uv run pytest --cov=${{ inputs.package_name }} tests/

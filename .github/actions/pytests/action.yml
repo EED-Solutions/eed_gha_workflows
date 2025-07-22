@@ -1,7 +1,7 @@
 name: 'Callable Pytests'
 description: 'Runs pytest using uv and a specified Python version'
 inputs:
-  python-version:
+  python_version:
     description: 'Python version to use'
     required: true
     default: '3.12'
@@ -38,7 +38,7 @@ runs:
       if: ${{ inputs.set_up_python == 'true' }}
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ inputs.python-version }}
+        python-version: ${{ inputs.python_version }}
 
     - name: Install dependencies
       if: ${{ inputs.install_dependencies == 'true' }}

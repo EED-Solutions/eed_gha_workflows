@@ -5,10 +5,23 @@ inputs:
     description: 'Branch name to check if it is main'
     required: false
     default: ''
+  checkout_code:
+    description: 'Whether to checkout the code before running Ruff'
+    required: false
+    default: 'true'
+  install_uv:
+    description: 'Whether to install uv before running tests'
+    required: false
+    default: 'true'
+  set_up_ruff:
+    description: 'Whether to set up Ruff before running tests'
+    required: false
+    default: 'true'
 runs:
   using: "composite"
   steps:
     - name: Checkout repository
+      if: ${{ inputs.checkout_code == 'true' }}
       uses: actions/checkout@v4
     - name: Echo environment
       shell: bash
@@ -16,11 +29,13 @@ runs:
         echo "GITHUB_REF=${GITHUB_REF}"
         echo "BRANCH_NAME=${{ inputs.branch_name }}"
     - name: Install uv
+      if: ${{ inputs.install_uv == 'true' }}
       uses: astral-sh/setup-uv@v4
       with:
         enable-cache: true
 
     - name: Set up Ruff
+      if: ${{ inputs.set_up_ruff == 'true' }}
       uses: astral-sh/ruff-action@v3
     - name: Run Ruff
       shell: bash

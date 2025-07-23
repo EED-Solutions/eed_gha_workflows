@@ -1,0 +1,33 @@
+name: 'install uv'
+description: 'Installs uv package management tool' # https://github.com/astral-sh/setup-uv
+inputs:
+  execute:
+    description: 'Whether to install uv'
+    required: false
+    default: 'true'
+  version_file:
+    description: 'Path to the version file (e.g., pyproject.toml) to install uv from'
+    required: false
+    default: 'pyproject.toml'
+  action_version:
+    description: 'Version of the uv action to use'
+    required: false
+    default: 'v6'
+  python_version:
+    description: 'Python version to use for uv'
+    required: false
+    default: ''
+  enable-cache:
+    description: 'Whether to enable caching for uv'
+    required: false
+    default: 'true'
+runs:
+  using: "composite"
+  steps:
+    - name: install uv
+      if: ${{ inputs.execute == 'true' }}
+      uses: astral-sh/setup-uv@${{ inputs.action_version }}
+      with:
+        version-file: ${{ inputs.version_file }}
+        python-version: ${{ inputs.python_version }}
+        enable-cache: ${{ inputs.enable_cache }}

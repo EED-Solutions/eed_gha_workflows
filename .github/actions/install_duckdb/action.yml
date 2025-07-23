@@ -1,0 +1,23 @@
+name: 'install duckdb'
+description: 'Installs DuckDB using the opt-nc/setup-duckdb-action'
+inputs:
+  install_duckdb:
+    description: 'Whether to install DuckDB'
+    required: false
+    default: 'true'
+  version:
+    description: 'DuckDB version to install'
+    required: false
+    default: '1.3.2'  # 'latest'
+  action_version:
+    description: 'Version of the DuckDB action to use'
+    required: false
+    default: 'v1.0.14'
+runs:
+  using: "composite"
+  steps:
+    - name: install duckdb
+      if: ${{ inputs.install_duckdb == 'true' }}
+      uses: opt-nc/setup-duckdb-action@${{ inputs.action_version }}
+      with:
+        version: ${{ inputs.version }}

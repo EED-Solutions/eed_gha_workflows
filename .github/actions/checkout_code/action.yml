@@ -44,7 +44,7 @@ runs:
   steps:
     - name: Checkout code
       if: ${{ inputs.execute == 'true' }}
-      uses: actions/checkoutv4
+      uses: actions/checkout@v4
       with:
         repository: ${{ inputs.repository }}
         ref: ${{ inputs.branch_name }}
@@ -53,4 +53,4 @@ runs:
         fetch-depth: ${{ inputs.fetch_depth }}
         fetch-tags: ${{ inputs.fetch_tags }}
         sparse-checkout: ${{ inputs.sparse_checkout }}
-        token: ${{ secrets.GH_PAT }}
+        # token: ${{ secrets.GH_PAT }}

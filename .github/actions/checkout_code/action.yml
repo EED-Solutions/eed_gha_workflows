@@ -47,7 +47,7 @@ runs:
       uses: actions/checkout@v4
       with:
         repository: ${{ inputs.repository }}
-        ref: ${{ inputs.branch_name }}
+        ref: ${{ inputs.ref }}
         path: ${{ inputs.path }}
         submodules: ${{ inputs.submodules }}
         fetch-depth: ${{ inputs.fetch_depth }}

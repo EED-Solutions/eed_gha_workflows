@@ -9,10 +9,10 @@ inputs:
     description: 'Path to the version file (e.g., pyproject.toml) to install uv from'
     required: false
     default: 'pyproject.toml'
-  action_version:
-    description: 'Version of the uv action to use'
-    required: false
-    default: 'v6'
+  # action_version:
+  #   description: 'Version of the uv action to use'
+  #   required: false
+  #   default: 'v6'
   python_version:
     description: 'Python version to use for uv'
     required: false
@@ -26,7 +26,7 @@ runs:
   steps:
     - name: install uv
       if: ${{ inputs.execute == 'true' }}
-      uses: astral-sh/setup-uv@${{ inputs.action_version }}
+      uses: astral-sh/setup-uv@v6
       with:
         version-file: ${{ inputs.version_file }}
         python-version: ${{ inputs.python_version }}

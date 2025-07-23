@@ -17,10 +17,10 @@ inputs:
     description: 'Whether to checkout code'
     required: false
     default: 'true'
-  action_version:
-    description: 'Version of the action to use'
-    required: false
-    default: 'v4'
+  # action_version:
+  #   description: 'Version of the action to use'
+  #   required: false
+  #   default: 'v4'
   submodules:
     description: 'Whether to checkout submodules'
     required: false
@@ -44,7 +44,7 @@ runs:
   steps:
     - name: Checkout code
       if: ${{ inputs.execute == 'true' }}
-      uses: actions/checkout@{{ inputs.action_version }}
+      uses: actions/checkoutv4
       with:
         repository: ${{ inputs.repository }}
         ref: ${{ inputs.branch_name }}

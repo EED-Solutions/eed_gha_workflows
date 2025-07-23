@@ -1,10 +1,6 @@
-name: 'Callable Ruff'
+name: 'Ruff check'
 description: 'Runs Ruff linter with uv setup'
 inputs:
-  branch_name:
-    description: 'Branch name to check if it is main'
-    required: false
-    default: ''
   checkout_code:
     description: 'Whether to checkout the code before running Ruff'
     required: false
@@ -23,11 +19,6 @@ runs:
     - name: Checkout repository
       if: ${{ inputs.checkout_code == 'true' }}
       uses: actions/checkout@v4
-    - name: Echo environment
-      shell: bash
-      run: |
-        echo "GITHUB_REF=${GITHUB_REF}"
-        echo "BRANCH_NAME=${{ inputs.branch_name }}"
     - name: Install uv
       if: ${{ inputs.install_uv == 'true' }}
       uses: astral-sh/setup-uv@v4

@@ -1,0 +1,16 @@
+name: 'set up python environment'
+description: 'Sets up the Python environment for the workflow'
+inputs:
+  execute:
+    description: 'Whether to install dependencies'
+    required: false
+    default: 'true'
+runs:
+  using: "composite"
+  steps:
+    - name: Install dependencies
+      if: ${{ inputs.execute == 'true' }}
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        uv sync

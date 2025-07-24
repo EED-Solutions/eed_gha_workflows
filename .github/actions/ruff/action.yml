@@ -1,0 +1,33 @@
+name: 'Ruff check'
+description: 'Runs Ruff linter with uv setup'
+inputs:
+  checkout_code:
+    description: 'Whether to checkout the code before running Ruff'
+    required: false
+    default: 'true'
+  install_uv:
+    description: 'Whether to install uv before running tests'
+    required: false
+    default: 'true'
+  set_up_ruff:
+    description: 'Whether to set up Ruff before running tests'
+    required: false
+    default: 'true'
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      if: ${{ inputs.checkout_code == 'true' }}
+      uses: actions/checkout@v4
+    - name: Install uv
+      if: ${{ inputs.install_uv == 'true' }}
+      uses: astral-sh/setup-uv@v4
+      with:
+        enable-cache: true
+
+    - name: Set up Ruff
+      if: ${{ inputs.set_up_ruff == 'true' }}
+      uses: astral-sh/ruff-action@v3
+    - name: Run Ruff
+      shell: bash
+      run: uv run ruff check --output-format=github

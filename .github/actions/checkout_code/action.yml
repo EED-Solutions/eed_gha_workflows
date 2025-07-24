@@ -1,0 +1,51 @@
+name: 'Checkout code'
+description: 'Checks out code from a specified repository and branch. Wrapper for actions/checkout.'
+inputs:
+  repository:
+    description: 'Repository to check out'
+    required: false
+    default: ''
+  ref:
+    description: 'Branch name to check out'
+    required: false
+    default: ''
+  path:
+    description: 'Path to check out the code'
+    required: false
+    default: ''
+  execute:
+    description: 'Whether to checkout code'
+    required: false
+    default: 'true'
+  submodules:
+    description: 'Whether to checkout submodules'
+    required: false
+    default: 'recursive'
+  fetch-depth:
+    description: 'Fetch depth for the checkout'
+    required: false
+    default: '1'
+  fetch-tags:
+    description: 'Whether to fetch tags'
+    required: false
+    default: 'false'
+  sparse-checkout:
+    description: 'Sparse checkout paths'
+    required: false
+    default: ''
+    # |
+    # README.md
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      if: ${{ inputs.execute == 'true' }}
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ inputs.repository }}
+        ref: ${{ inputs.ref }}
+        path: ${{ inputs.path }}
+        submodules: ${{ inputs.submodules }}
+        fetch-depth: ${{ inputs.fetch_depth }}
+        fetch-tags: ${{ inputs.fetch_tags }}
+        sparse-checkout: ${{ inputs.sparse_checkout }}

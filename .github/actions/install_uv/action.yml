@@ -1,5 +1,5 @@
 name: 'install uv'
-description: 'Installs uv package management tool' # https://github.com/astral-sh/setup-uv
+description: 'Installs uv package management tool and python' # https://github.com/astral-sh/setup-uv
 inputs:
   execute:
     description: 'Whether to install uv'
@@ -9,10 +9,6 @@ inputs:
     description: 'Path to the version file (e.g., pyproject.toml) to install uv from'
     required: false
     default: 'pyproject.toml'
-  # action_version:
-  #   description: 'Version of the uv action to use'
-  #   required: false
-  #   default: 'v6'
   python_version:
     description: 'Python version to use for uv'
     required: false

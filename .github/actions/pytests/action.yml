@@ -13,10 +13,6 @@ inputs:
     description: 'Whether to install uv before running tests'
     required: false
     default: 'true'
-  set_up_python:
-    description: 'Whether to set up Python before running tests'
-    required: false
-    default: 'true'
   install_dependencies:
     description: 'Whether to install dependencies before running tests'
     required: false

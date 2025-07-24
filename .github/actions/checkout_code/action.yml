@@ -1,14 +1,14 @@
 name: 'Checkout code'
-description: 'Installs DuckDB using the opt-nc/setup-duckdb-action'
+description: 'Checks out code from a specified repository and branch. Wrapper for actions/checkout.'
 inputs:
   repository:
     description: 'Repository to check out'
     required: false
-    default: '' # ${ github.repository }
+    default: ''
   ref:
     description: 'Branch name to check out'
     required: false
-    default: '' # ${ github.ref }
+    default: ''
   path:
     description: 'Path to check out the code'
     required: false
@@ -17,10 +17,6 @@ inputs:
     description: 'Whether to checkout code'
     required: false
     default: 'true'
-  # action_version:
-  #   description: 'Version of the action to use'
-  #   required: false
-  #   default: 'v4'
   submodules:
     description: 'Whether to checkout submodules'
     required: false
@@ -53,4 +49,3 @@ runs:
         fetch-depth: ${{ inputs.fetch_depth }}
         fetch-tags: ${{ inputs.fetch_tags }}
         sparse-checkout: ${{ inputs.sparse_checkout }}
-        # token: ${{ secrets.GH_PAT }}

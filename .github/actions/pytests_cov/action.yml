@@ -17,6 +17,10 @@ inputs:
     description: 'Whether to install dependencies before running tests'
     required: false
     default: 'true'
+  # package_name:
+  #   description: 'Name of the package to run tests against'
+  #   required: true
+  #   type: string
 runs:
   using: "composite"
   steps:
@@ -38,4 +42,4 @@ runs:
     - name: Run pytests
       shell: bash
       run: |
-        uv run --frozen pytest --coverage tests
+        uv run --frozen pytest --cov=src tests

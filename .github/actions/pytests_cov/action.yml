@@ -1,4 +1,4 @@
-name: 'Callable Pytests'
+name: 'Pytest Coverage'
 description: 'Runs pytest using uv and a specified Python version'
 inputs:
   python_version:
@@ -38,4 +38,4 @@ runs:
     - name: Run pytests
       shell: bash
       run: |
-        uv run --frozen pytest tests
+        uv run --frozen pytest --coverage tests

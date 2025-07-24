@@ -5,11 +5,11 @@ inputs:
     description: 'Whether to install uv'
     required: false
     default: 'true'
-  version_file:
+  version-file:
     description: 'Path to the version file (e.g., pyproject.toml) to install uv from'
     required: false
     default: 'pyproject.toml'
-  python_version:
+  python-version:
     description: 'Python version to use for uv'
     required: false
     default: ''
@@ -24,6 +24,6 @@ runs:
       if: ${{ inputs.execute == 'true' }}
       uses: astral-sh/setup-uv@v6
       with:
-        version-file: ${{ inputs.version_file }}
-        python-version: ${{ inputs.python_version }}
-        enable-cache: ${{ inputs.enable_cache }}
+        version-file: ${{ inputs.version-file }}
+        python-version: ${{ inputs.python-version }}
+        enable-cache: ${{ inputs.enable-cache }}

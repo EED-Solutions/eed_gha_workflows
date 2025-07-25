@@ -21,6 +21,10 @@ inputs:
   #   description: 'Name of the package to run tests against'
   #   required: true
   #   type: string
+  fail-under:
+    description: 'Coverage fail under threshold'
+    required: false
+    default: '100'
 runs:
   using: "composite"
   steps:
@@ -42,4 +46,4 @@ runs:
     - name: Run pytests
       shell: bash
       run: |
-        uv run --frozen pytest --cov=src tests
+        uv run --frozen pytest --cov=src --cov-fail-under=${{inputs.fail-under}} --cov-report=term-missing  tests

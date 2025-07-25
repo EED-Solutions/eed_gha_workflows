@@ -1,26 +1,26 @@
 name: 'Pytest Coverage'
 description: 'Runs pytest using uv and a specified Python version'
 inputs:
-  python_version:
-    description: 'Python version to use'
-    required: true
-    default: '3.13'
-  checkout_code:
-    description: 'Whether to checkout the code before running tests'
+  fail-under:
+    description: 'Coverage fail under threshold'
     required: false
-    default: 'true'
+    default: '90'
   install_uv:
     description: 'Whether to install uv before running tests'
+    required: false
+    default: 'true'
+  checkout_code:
+    description: 'Whether to checkout the code before running tests'
     required: false
     default: 'true'
   install_dependencies:
     description: 'Whether to install dependencies before running tests'
     required: false
     default: 'true'
-  # package_name:
-  #   description: 'Name of the package to run tests against'
-  #   required: true
-  #   type: string
+  python_version:
+    description: 'Python version to use'
+    required: true
+    default: '3.13'
 runs:
   using: "composite"
   steps:
@@ -42,4 +42,4 @@ runs:
     - name: Run pytests
       shell: bash
       run: |
-        uv run --frozen pytest --cov=src tests
+        uv run --frozen pytest --cov=src --cov-fail-under=${{inputs.fail-under}} --cov-report=term-missing  tests

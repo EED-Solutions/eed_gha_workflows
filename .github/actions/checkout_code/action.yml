@@ -57,6 +57,9 @@ runs:
       if: ${{ inputs.echo-files == 'true' }}
       shell: bash
       run: |
+        echo "pwd: $(pwd)"
+        echo "home: $HOME"
+        tree -a -L 4
         if [ -n "${{ inputs.path }}" ]; then
           echo "Files in ${{ inputs.path }}:"
           find ${{ inputs.path }} -type f -print

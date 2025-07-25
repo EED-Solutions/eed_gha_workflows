@@ -35,6 +35,10 @@ inputs:
     default: ''
     # |
     # README.md
+  echo-files:
+    description: 'Whether to echo the files after checkout'
+    required: false
+    default: 'false'
 runs:
   using: "composite"
   steps:
@@ -49,3 +53,21 @@ runs:
         fetch-depth: ${{ inputs.fetch_depth }}
         fetch-tags: ${{ inputs.fetch_tags }}
         sparse-checkout: ${{ inputs.sparse_checkout }}
+    - name: Echo files
+      if: ${{ inputs.echo-files == 'true' }}
+      shell: bash
+      run: |
+        echo "pwd: $(pwd)"
+        echo "home: $HOME"
+        tree -a -L 4
+        if [ -n "${{ inputs.path }}" ]; then
+          echo "Files in ${{ inputs.path }}:"
+          find ${{ inputs.path }} -type f -print
+          echo "Directories in ${{ inputs.path }}:"
+          find ${{ inputs.path }} -type d -print
+        else
+          echo "Files in the current directory:"
+          find . -type f -print
+          echo "Directories in the current directory:"
+          find . -type d -print
+        fi

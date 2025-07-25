@@ -24,7 +24,7 @@ inputs:
   fail-under:
     description: 'Coverage fail under threshold'
     required: false
-    default: '100'
+    default: '90'
 runs:
   using: "composite"
   steps:

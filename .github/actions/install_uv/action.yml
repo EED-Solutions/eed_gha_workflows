@@ -8,7 +8,7 @@ inputs:
   version-file:
     description: 'Path to the version file (e.g., pyproject.toml) to install uv from'
     required: false
-    default: 'pyproject.toml'
+    default: ''  # If not provided, the default version will be used, e.g. pyproject.toml
   python-version:
     description: 'Python version to use for uv'
     required: false
@@ -17,6 +17,10 @@ inputs:
     description: 'Whether to enable caching for uv'
     required: false
     default: 'true'
+  version:
+    description: 'Specific version of uv to install if version-file is not provided'
+    required: false
+    default: '0.8.3'
 runs:
   using: "composite"
   steps:
@@ -27,3 +31,4 @@ runs:
         version-file: ${{ inputs.version-file }}
         python-version: ${{ inputs.python-version }}
         enable-cache: ${{ inputs.enable-cache }}
+        version: ${{ inputs.version}}

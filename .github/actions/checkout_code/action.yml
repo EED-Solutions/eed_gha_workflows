@@ -50,9 +50,9 @@ runs:
         ref: ${{ inputs.ref }}
         path: ${{ inputs.path }}
         submodules: ${{ inputs.submodules }}
-        fetch-depth: ${{ inputs.fetch_depth }}
-        fetch-tags: ${{ inputs.fetch_tags }}
-        sparse-checkout: ${{ inputs.sparse_checkout }}
+        fetch-depth: ${{ inputs.fetch-depth }}
+        fetch-tags: ${{ inputs.fetch-tags }}
+        sparse-checkout: ${{ inputs.sparse-checkout }}
     - name: Echo files
       if: ${{ inputs.echo-files == 'true' }}
       shell: bash

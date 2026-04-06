@@ -29,6 +29,10 @@ inputs:
     description: ''
     required: false
     default: ''
+  encryption_salt:
+    description: ''
+    required: false
+    default: ''
 runs:
   using: "composite"
   steps:
@@ -49,5 +53,6 @@ runs:
       env:
         ENCRYPTION_PASWORD: ${{ inputs.encryption_password }}
         ENCRYPTION_RESULT: ${{ inputs.encryption_result }}
+        ENCRYPTION_SALT: ${{ inputs.encryption_salt }}
       run: |
         uv run --frozen pytest tests

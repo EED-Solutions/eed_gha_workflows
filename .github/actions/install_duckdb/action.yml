@@ -8,12 +8,12 @@ inputs:
   version:
     description: 'DuckDB version to install'
     required: false
-    default: 'v1.4.1'  # 'latest'
+    default: 'v1.5.1'  # 'latest'
 runs:
   using: "composite"
   steps:
     - name: install duckdb
       if: ${{ inputs.install_duckdb == 'true' }}
-      uses: opt-nc/setup-duckdb-action@v1.1.0
+      uses: opt-nc/setup-duckdb-action@v1.2.5
       with:
         version: ${{ inputs.version }}

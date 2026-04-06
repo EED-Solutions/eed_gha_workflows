@@ -20,13 +20,13 @@ inputs:
   version:
     description: 'Specific version of uv to install if version-file is not provided'
     required: false
-    default: '0.8.3'
+    default: '0.10.12'
 runs:
   using: "composite"
   steps:
     - name: install uv
       if: ${{ inputs.execute == 'true' }}
-      uses: astral-sh/setup-uv@v6
+      uses: astral-sh/setup-uv@v7
       with:
         version-file: ${{ inputs.version-file }}
         python-version: ${{ inputs.python-version }}

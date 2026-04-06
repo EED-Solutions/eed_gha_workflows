@@ -4,7 +4,11 @@ inputs:
   python_version:
     description: 'Python version to use'
     required: true
-    default: '3.13'
+    default: ''
+  version-file:
+    description: 'Path to the version file (e.g., pyproject.toml) to install uv from'
+    required: false
+    default: '.python-version'
   checkout_code:
     description: 'Whether to checkout the code before running tests'
     required: false
@@ -28,6 +32,7 @@ runs:
       uses: EED-Solutions/eed_gha_workflows/.github/actions/install_uv@main
       with:
         python-version: ${{ inputs.python_version }}
+        version-file: ${{ inputs.version-file }}
     - name: Install dependencies
       if: ${{ inputs.install_dependencies == 'true' }}
       uses: EED-Solutions/eed_gha_workflows/.github/actions/set_up_py_env@main

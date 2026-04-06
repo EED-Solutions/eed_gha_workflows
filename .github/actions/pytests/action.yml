@@ -21,6 +21,10 @@ inputs:
     description: 'Whether to install dependencies before running tests'
     required: false
     default: 'true'
+  encryption_password:
+    description: 'Encryption password for tests (set from GitHub secret)'
+    required: false
+    default: ''
 runs:
   using: "composite"
   steps:
@@ -38,5 +42,7 @@ runs:
       uses: EED-Solutions/eed_gha_workflows/.github/actions/set_up_py_env@main
     - name: Run pytests
       shell: bash
+      env:
+        ENCRYPTION_PASWORD: ${{ inputs.encryption_password }}
       run: |
         uv run --frozen pytest tests

@@ -12,6 +12,7 @@ their composite actions.
 - Reusable workflows live under `.github/workflows/`:
   - `callable_pytests.yml`
   - `callable_pytests_cov.yml`
+  - `callable_publish_pypi.yml`
   - `callable_ruff.yml`
 
 Consumer repositories should call the reusable workflows rather than copy their
@@ -57,6 +58,31 @@ Use prerelease tags such as `1.0.0-rc.1` only for integration testing. Mark
 them as prereleases on GitHub and do not recommend them for production
 consumers. Publish the stable tag on the same commit only after the
 Copier-generated canary repository has validated the candidate.
+
+## Publishing a Python package
+
+Generated package repositories receive a separate `publish.yml` workflow. It
+calls `callable_publish_pypi.yml` when a GitHub Release is published:
+
+- GitHub prereleases publish to TestPyPI.
+- Stable GitHub Releases publish to PyPI.
+- The release tag must exactly match the version in `pyproject.toml` (for
+  example, tag `1.2.0` for project version `1.2.0`).
+
+Before the first upload, configure a [Trusted Publisher](https://docs.pypi.org/trusted-publishers/adding-a-publisher/)
+for the package on each index. For a package that does not exist yet, configure
+a [pending publisher](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/);
+the first successful upload creates the project. Use the generated repository,
+the workflow filename `publish.yml`, and the matching GitHub environment:
+`testpypi` on TestPyPI and `pypi` on PyPI. Trusted Publishing uses GitHub OIDC,
+so no PyPI API token needs to be stored as a repository secret. Configure
+both publishers if you plan to publish release candidates to TestPyPI and
+stable versions to PyPI.
+
+The reusable workflow builds the wheel and source distribution, then publishes
+those build artifacts in a separate job. Since publishing uses a reusable
+workflow, validate the OIDC publisher configuration with a canary package on
+TestPyPI before relying on production publishing.
 
 ## CI for this repository
 

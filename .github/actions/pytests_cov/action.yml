@@ -1,6 +1,9 @@
 name: 'Pytest Coverage'
 description: 'Runs pytest using uv and a specified Python version'
 inputs:
+  package_name:
+    description: 'Python package name to measure coverage for'
+    required: true
   fail-under:
     description: 'Coverage fail under threshold'
     required: false
@@ -30,18 +33,21 @@ runs:
   steps:
     - name: Checkout code
       if: ${{ inputs.checkout_code == 'true' }}
-      uses: EED-Solutions/eed_gha_workflows/.github/actions/checkout_code@main
+      uses: EED-Solutions/eed_gha_workflows/.github/actions/checkout_code@1.0.0
     - name: Install uv
       if: ${{ inputs.install_uv == 'true' }}
-      uses: EED-Solutions/eed_gha_workflows/.github/actions/install_uv@main
+      uses: EED-Solutions/eed_gha_workflows/.github/actions/install_uv@1.0.0
       with:
         enable-cache: true
         python-version: ${{ inputs.python_version }}
         version-file: ${{ inputs.version-file }}
     - name: Install dependencies
       if: ${{ inputs.install_dependencies == 'true' }}
-      uses: EED-Solutions/eed_gha_workflows/.github/actions/set_up_py_env@main
+      uses: EED-Solutions/eed_gha_workflows/.github/actions/set_up_py_env@1.0.0
     - name: Run pytests
       shell: bash
+      env:
+        PACKAGE_NAME: ${{ inputs.package_name }}
+        FAIL_UNDER: ${{ inputs.fail-under }}
       run: |
-        uv run --frozen pytest --cov=src --cov-fail-under=${{inputs.fail-under}} --cov-report=term-missing  tests
+        uv run --frozen pytest --cov="$PACKAGE_NAME" --cov-fail-under="$FAIL_UNDER" --cov-report=term-missing tests

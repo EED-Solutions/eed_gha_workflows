@@ -18,10 +18,10 @@ runs:
   steps:
     - name: Checkout repository
       if: ${{ inputs.checkout_code == 'true' }}
-      uses: EED-Solutions/eed_gha_workflows/.github/actions/checkout_code@main
+      uses: EED-Solutions/eed_gha_workflows/.github/actions/checkout_code@1.0.0
     - name: Install uv
       if: ${{ inputs.install_uv == 'true' }}
-      uses: EED-Solutions/eed_gha_workflows/.github/actions/install_uv@main
+      uses: EED-Solutions/eed_gha_workflows/.github/actions/install_uv@1.0.0
     - name: Set up Ruff
       if: ${{ inputs.set_up_ruff == 'true' }}
       uses: astral-sh/ruff-action@v3

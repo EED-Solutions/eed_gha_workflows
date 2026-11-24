@@ -1,7 +1,6 @@
 name: pytests
 
 on:
-    pull_request:
     workflow_dispatch:
 jobs:
     pytests:

@@ -5,25 +5,14 @@ on:
 
 jobs:
   callable_pytests:
+    name: Run Pytests (${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.12", "3.13"]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Install uv # https://eed-solutions.atlassian.net/wiki/spaces/ES/pages/782434388/Best+Practice+uv+package+management#Github-Actions
-        uses: astral-sh/setup-uv@v4
+      - name: Run Pytests
+        uses: EED-Solutions/eed_gha_workflows/.github/actions/pytests@v1.0.0
         with:
-          enable-cache: true
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          uv sync
-      - name: Run pytests
-        run: |
-          uv run pytest tests
+          python_version: ${{ matrix.python-version }}
+          version-file: ''

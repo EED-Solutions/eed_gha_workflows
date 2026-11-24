@@ -38,16 +38,16 @@ runs:
   steps:
     - name: Checkout code
       if: ${{ inputs.checkout_code == 'true' }}
-      uses: EED-Solutions/eed_gha_workflows/.github/actions/checkout_code@main
+      uses: EED-Solutions/eed_gha_workflows/.github/actions/checkout_code@v1.0.0
     - name: Install uv
       if: ${{ inputs.install_uv == 'true' }}
-      uses: EED-Solutions/eed_gha_workflows/.github/actions/install_uv@main
+      uses: EED-Solutions/eed_gha_workflows/.github/actions/install_uv@v1.0.0
       with:
         python-version: ${{ inputs.python_version }}
         version-file: ${{ inputs.version-file }}
     - name: Install dependencies
       if: ${{ inputs.install_dependencies == 'true' }}
-      uses: EED-Solutions/eed_gha_workflows/.github/actions/set_up_py_env@main
+      uses: EED-Solutions/eed_gha_workflows/.github/actions/set_up_py_env@v1.0.0
     - name: Run pytests
       shell: bash
       env:

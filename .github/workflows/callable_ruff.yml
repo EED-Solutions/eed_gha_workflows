@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Ruff
-        uses: EED-Solutions/eed_gha_workflows/.github/actions/ruff@v1.0.0
+        uses: EED-Solutions/eed_gha_workflows/.github/actions/ruff@1.0.0
